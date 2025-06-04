@@ -1,4 +1,3 @@
-use lindera::LinderaResult;
 use lindera::dictionary::{DictionaryKind, load_dictionary_from_kind};
 use lindera::mode::Mode;
 use lindera::segmenter::Segmenter;

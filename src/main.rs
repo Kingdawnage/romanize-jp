@@ -3,6 +3,7 @@ use axum::{
     response::IntoResponse,
     routing::{get, post},
 };
+use axum_prometheus::PrometheusMetricLayer;
 use tokio::net::TcpListener;
 use tracing_subscriber::filter::LevelFilter;
 
@@ -18,18 +19,22 @@ async fn main() {
         .with_max_level(LevelFilter::DEBUG)
         .init();
 
+    let (prometheus_layer, metric_handle) = PrometheusMetricLayer::pair();
+
     let port = 8080;
 
     let app: Router = Router::new()
         .route("/", get(|| async { Json("Hello, World!") }))
         .route("/romanize", post(romanize))
-        .route("/health", get(health_check));
+        .route("/health", get(health_check))
+        .route("/metrics", get(|| async move { metric_handle.render()}))
+        .layer(prometheus_layer);
 
     println!("Server running on http://localhost:{}", port);
 
     let listener = TcpListener::bind(format!("0.0.0.0:{}", port))
         .await
-        .expect("Failed to bind to address");
+        .unwrap();
 
     println!("Listening on {}", listener.local_addr().unwrap());
 

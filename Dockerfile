@@ -12,6 +12,6 @@ COPY . .
 
 RUN cargo build --release
 
-EXPOSE 5000
+EXPOSE 8080
 
-CMD cargo run --release
+CMD ["./target/release/romanize-jp"]
