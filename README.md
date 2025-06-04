@@ -6,25 +6,18 @@ A server that romanizes Japanese text in API responses.
 
 Romanize-JP is a lightweight server that provides an API to convert Japanese text (hiragana, katakana, and kanji) into romaji (Latin alphabet). This makes Japanese text more accessible to users who can't read Japanese scripts.
 
-## Installation
-
-### Prerequisites
-
-- Node.js (v12+)
-- npm or yarn
-
-### Setup
+## Setup
 
 ```bash
 # Clone repository
 git clone https://github.com/yourusername/romanize-jp.git
 cd romanize-jp
 
-# Install dependencies
-npm install
-
 # Start server
-npm start
+cargo run --release
+
+# Create docker container
+docker compose up -d
 ```
 
 ## Usage
