@@ -1,0 +1,7 @@
+services:
+  romanize-jp:
+    container_name: romanize-jp
+    image: kingawnage/romanize-jp:latest
+    build: .
+    ports:
+      - "8080:8080"
